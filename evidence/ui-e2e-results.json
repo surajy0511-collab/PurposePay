@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-11-21 17:46:30 UTC",
+  "results": [
+    {
+      "check": "Schemes tab shows both seeded schemes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Pre-flight checklist shows all rules green before paying",
+      "passed": true,
+      "detail": "You are an active registered beneficiary | Scheme is running | Scheme is open until 21 Dec 2026, 5:45 pm | Merchant is approved for Food grain | Your remaining entitlement: \u20b95,000.00 | Amount is within your entitlement | Per-payment cap \u20b92,000.00"
+    },
+    {
+      "check": "Beneficiary payment of Rs 1,800 confirmed on chain",
+      "passed": true,
+      "detail": "Confirmed in block 17. Transaction 0xfa25723d2477734b72330d2e8221400856e1e61602f3f62a4943782e361f47e0 | gas used 117010"
+    },
+    {
+      "check": "Purpose lock blocks pharmacy payment from food scheme",
+      "passed": true,
+      "detail": "Blocked: this merchant is not approved for this scheme's category, is suspended, or is not registered. [MerchantNotEligible]"
+    },
+    {
+      "check": "Per-payment cap blocks Rs 2,500",
+      "passed": true,
+      "detail": "Blocked: above the per-payment cap of \u20b92,000.00. [ExceedsPerTxnCap]"
+    },
+    {
+      "check": "Beneficiary cannot create a scheme (access control)",
+      "passed": true,
+      "detail": "Your account does not hold the role required for this action. [AccessControlUnauthorizedAccount]"
+    },
+    {
+      "check": "Compliance froze a beneficiary",
+      "passed": true,
+      "detail": "Confirmed in block 18. Transaction 0x27011903b95d7e2aa7eee221c4ff99e8e923c941a7704b44cca0a8abdb995de8 | gas used 31137"
+    },
+    {
+      "check": "Frozen beneficiary cannot pay",
+      "passed": true,
+      "detail": "This wallet is not an active beneficiary (unregistered or frozen). [BeneficiaryNotActive]"
+    },
+    {
+      "check": "Compliance unfroze the beneficiary",
+      "passed": true,
+      "detail": "Confirmed in block 19. Transaction 0x8be8f68c672b8140d1d76326a36b84685878094842c97e17dc8d065394c9ce69 | gas used 31125"
+    },
+    {
+      "check": "Merchant received 1,800.00 on chain",
+      "passed": true,
+      "detail": "Sri Lakshmi Ration Store (Merchant) | Role: merchant | 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720 | Balance: \u20b91,800.00 eRS (simulated)"
+    },
+    {
+      "check": "Merchant cash-out (token burn) confirmed",
+      "passed": true,
+      "detail": "Confirmed in block 20. Transaction 0x4ae4b2d4c918ecf2991ccd8baf6cf4760e1f7a33f969f583c26c6f6e17d1b9e7 | gas used 31233"
+    },
+    {
+      "check": "Ledger lists Spent and Redeemed events",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Verify on chain returns a successful receipt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "After +31 days expired entitlements can be returned",
+      "passed": true,
+      "detail": "3 return buttons"
+    },
+    {
+      "check": "All expired entitlements returned to the treasury",
+      "passed": true,
+      "detail": "0 left"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "deploy_RupeeToken": 862735,
+  "deploy_ParticipantRegistry": 1202305,
+  "deploy_WelfareVault": 1973669,
+  "registerBeneficiary": 120587,
+  "createScheme": 143780,
+  "fundScheme": 130439,
+  "allocate_single": 84166,
+  "allocateBatch_100": 2966398,
+  "spend": 116998,
+  "redeem": 31221,
+  "reclaimExpired": 79920,
+  "allocateBatch_100_per_beneficiary": 29664
+}

@@ -1,0 +1,72 @@
+PurposePay - test run 2026-11-21 11:02 UTC
+node v22.23.5 | hardhat 2.28.0 | solc 0.8.28+commit.7893614a.Emscripten.clang
+
+
+
+  End-to-end lifecycle, invariants and gas
+    ✔ full multi-scheme lifecycle conserves value (issue -> fund -> allocate -> spend -> redeem -> reclaim) (477ms)
+      random run: 91 operations succeeded, 109 were correctly rejected, invariants held
+    ✔ randomised operation sequence never breaks the accounting invariants (seeded, 200 steps) (365ms)
+      gas: {"deploy_RupeeToken":862735,"deploy_ParticipantRegistry":1202305,"deploy_WelfareVault":1973669,"registerBeneficiary":120587,"createScheme":143780,"fundScheme":130439,"allocate_single":84166,"allocateBatch_100":2966398,"spend":116998,"redeem":31221,"reclaimExpired":79920,"allocateBatch_100_per_beneficiary":29664}
+    ✔ measures gas for the main operations and writes evidence/gas-report.json (591ms)
+
+  ParticipantRegistry
+    merchants
+      ✔ registers a merchant and exposes eligibility per category bit
+      ✔ emits MerchantRegistered
+      ✔ rejects invalid inputs and duplicates
+      ✔ only a REGISTRAR can register; only COMPLIANCE can suspend
+      ✔ a suspended merchant is not eligible; reinstating restores it
+      ✔ updates categories and rejects updates for unknown merchants
+    beneficiaries
+      ✔ registers by identity hash only and blocks one person getting two wallets
+      ✔ rejects zero address, zero hash and re-registration
+      ✔ freeze / unfreeze toggles activity, only by COMPLIANCE, only for registered wallets
+      ✔ unregistered wallets are not active
+
+  RupeeToken (simulated e-rupee)
+    ✔ has 2 decimals (paise) and the expected metadata
+    ✔ lets only the ISSUER create tokens and emits Issued
+    ✔ rejects issuing by a non-issuer (access control)
+    ✔ rejects zero address and zero amount on issue
+    ✔ redeem burns the caller's tokens, reduces supply and emits Redeemed
+    ✔ rejects redeem of more than the balance and of zero
+    ✔ rejects a zero-address admin or issuer at deployment
+
+  WelfareVault
+    createScheme
+      ✔ creates a scheme, stores parameters and emits SchemeCreated
+      ✔ rejects non-admins, bad names, bad categories and bad windows
+      ✔ getScheme reverts for an unknown id
+    funding and allocation
+      ✔ moves tokens into the vault and tracks pool / liabilities (69ms)
+      ✔ only the scheme owner can fund or allocate; unknown scheme reverts
+      ✔ rejects zero funding and funding without allowance
+      ✔ rejects allocation to unregistered / frozen beneficiaries, over-pool and zero amounts
+      ✔ allocateBatch allocates to many, and validates array length and size
+      ✔ a failing entry in a batch reverts the whole batch (atomic)
+      ✔ withdrawPool returns un-allocated funds to the owner and cannot exceed the pool
+      ✔ revokeAllocation returns the entitlement to the pool
+    spend
+      ✔ pays an eligible merchant, reduces entitlement and emits Spent with the invoice reference
+      ✔ allows spending the exact remaining balance (edge) and then rejects any further spend
+      ✔ blocks purpose violation: merchant not approved for the scheme category
+      ✔ blocks unregistered merchants and suspended merchants
+      ✔ blocks a person who is not a beneficiary, a frozen beneficiary, and a beneficiary with no entitlement
+      ✔ enforces the per-transaction cap (boundary: cap allowed, cap+1 rejected)
+      ✔ rejects zero amount and unknown scheme
+      ✔ a scheme with start time in the future cannot be spent yet
+      ✔ expiry boundary: last second before expiry works, at expiry it is rejected
+      ✔ a paused scheme blocks spending; unpausing restores it; only COMPLIANCE may pause
+      ✔ a merchant can redeem received tokens to the bank (token burn + event)
+    expiry and reclaim
+      ✔ cannot reclaim before expiry
+      ✔ after expiry ANYONE can return the unspent entitlement to the department treasury
+      ✔ cannot reclaim twice, or when there is nothing to reclaim
+      ✔ cannot allocate after expiry
+    constructor
+      ✔ rejects zero addresses
+
+
+  47 passing (2s)
+

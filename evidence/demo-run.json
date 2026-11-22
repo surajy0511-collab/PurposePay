@@ -1,0 +1,339 @@
+{
+  "generatedAt": "2026-11-21T11:03:03.055Z",
+  "summary": {
+    "network": "hardhat",
+    "scheme1": {
+      "funded": "10000000",
+      "spent": "380000",
+      "reclaimed": "420000",
+      "pool": "9200000",
+      "outstanding": "0"
+    },
+    "totalSupplyPaise": "99620000",
+    "vaultTokenBalancePaise": "9200000",
+    "totalLiabilitiesPaise": "9200000",
+    "solvent": true,
+    "addresses": {
+      "RupeeToken": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "ParticipantRegistry": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "WelfareVault": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+    }
+  },
+  "steps": [
+    {
+      "n": 1,
+      "step": "Register beneficiary Ravi Kumar (salted ID hash only)",
+      "actor": "Registrar",
+      "function": "registerBeneficiary",
+      "txHash": "0x7c4ef7307f59c38345798ad478c88c1575a880c4422115a274dd78fba8790e2d",
+      "block": 4,
+      "gasUsed": 137687,
+      "events": [
+        "BeneficiaryRegistered(wallet=0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, idHash=0x0dad4ea80e316b556c8111812d63b362426c999dbbccf770184a71c91ddf1d7b)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 2,
+      "step": "Register beneficiary Meena Devi",
+      "actor": "Registrar",
+      "function": "registerBeneficiary",
+      "txHash": "0x2875c8fa03a0f0de9ccd4239281dabc32538e3c61286a2e93e2545a9404d56e2",
+      "block": 5,
+      "gasUsed": 120587,
+      "events": [
+        "BeneficiaryRegistered(wallet=0x976EA74026E726554dB657fA54763abd0C3a0aa9, idHash=0x6928eb0ea36f3a0bcdec59b6a95a2a4f0522adf2498c65be5c8b048aacf281c0)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 3,
+      "step": "Register merchant Sri Lakshmi Ration Store (FOOD_GRAIN + FERTILISER)",
+      "actor": "Registrar",
+      "function": "registerMerchant",
+      "txHash": "0x8c35b5f1331f46a8f4f7543fcab5a922c981ecc7fe6037cd2704ff509052319f",
+      "block": 6,
+      "gasUsed": 140435,
+      "events": [
+        "MerchantRegistered(merchant=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, name=Sri Lakshmi Ration Store, categoryMask=3, licenceHash=0x99b5e8995215dc148830a138d49ea79bc5b86b3847fa5d18cb2753019d515ceb)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 4,
+      "step": "Register merchant Jan Aushadhi Kendra (HEALTHCARE)",
+      "actor": "Registrar",
+      "function": "registerMerchant",
+      "txHash": "0x0a12dfe70fffb3303f8f489c33d4cf05c742f4d2c6288b5bb5a47f182901ab56",
+      "block": 7,
+      "gasUsed": 123263,
+      "events": [
+        "MerchantRegistered(merchant=0xBcd4042DE499D14e55001CcbB24a551F3b954096, name=Jan Aushadhi Kendra, categoryMask=4, licenceHash=0x5afa3e4e7577590ab1297e32326a2a253b79841a58a71079ea9b2a77cbb6be8e)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 5,
+      "step": "Duplicate identity: same person tries a second wallet",
+      "actor": "Registrar",
+      "function": "registerBeneficiary",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: DuplicateIdentity(0x0dad4ea80e316b556c8111812d63b362426c999dbbccf770184a71c91ddf1d7b)"
+    },
+    {
+      "n": 6,
+      "step": "Central bank issues Rs 10,00,000 simulated e-rupee to the Department",
+      "actor": "Issuer",
+      "function": "issue",
+      "txHash": "0xe19042e195bfb48b3643bd70f70e2840f2c513c966feb47cd887f65424e5417f",
+      "block": 9,
+      "gasUsed": 73190,
+      "events": [
+        "Transfer(from=0x0000000000000000000000000000000000000000, to=0x90F79bf6EB2c4f870365E785982E1f101E93b906, value=100000000)",
+        "Issued(to=0x90F79bf6EB2c4f870365E785982E1f101E93b906, amount=100000000, ledgerRef=0x5d670a20d11c8715d0ee0178b391e9e8a8c22e2cc0beba098a3f6bf6d9c6a7a8)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 7,
+      "step": "A non-issuer tries to create money",
+      "actor": "Department",
+      "function": "issue",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: AccessControlUnauthorizedAccount(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0x114e74f6ea3bd819998f78687bfcb11b140da08e9b7d222fa9c1f1ba1f2aa122)"
+    },
+    {
+      "n": 8,
+      "step": "Department approves the vault to pull funds",
+      "actor": "Department",
+      "function": "approve",
+      "txHash": "0x785ea9eb544ab2aaff89c0a0094d8995bdd1d03a0f0f40908d5ed6441039ac9d",
+      "block": 11,
+      "gasUsed": 46708,
+      "events": [
+        "Approval(owner=0x90F79bf6EB2c4f870365E785982E1f101E93b906, spender=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value=115792089237316195423570985008687907853269984665640564039457584007913129639935)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 9,
+      "step": "Create scheme 'PDS Food Grain Relief' (FOOD_GRAIN, cap Rs 2,000, 30 days)",
+      "actor": "Department",
+      "function": "createScheme",
+      "txHash": "0xb717ebf09e491364a0ed8e5d6d1b714c5c5ef3184f5c120eab4e0140b4a72b18",
+      "block": 12,
+      "gasUsed": 143912,
+      "events": [
+        "SchemeCreated(schemeId=1, owner=0x90F79bf6EB2c4f870365E785982E1f101E93b906, name=PDS Food Grain Relief, category=0, startTime=1795258994, expiry=1797850993, perTxnCap=200000)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 10,
+      "step": "Fund scheme 1 with Rs 1,00,000",
+      "actor": "Department",
+      "function": "fundScheme",
+      "txHash": "0xf783b0fc02b91238efade8bdfacb0315e10272071cb6579f64cda145ae88a31f",
+      "block": 13,
+      "gasUsed": 130427,
+      "events": [
+        "Transfer(from=0x90F79bf6EB2c4f870365E785982E1f101E93b906, to=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value=10000000)",
+        "SchemeFunded(schemeId=1, from=0x90F79bf6EB2c4f870365E785982E1f101E93b906, amount=10000000)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 11,
+      "step": "Allocate Rs 5,000 to Ravi and Rs 3,000 to Meena (batch)",
+      "actor": "Department",
+      "function": "allocateBatch",
+      "txHash": "0xcab095f9852dc75dfe946ff39d27b1dd1be7ec64f3d166d2c6143cc057c560da",
+      "block": 14,
+      "gasUsed": 114795,
+      "events": [
+        "Allocated(schemeId=1, beneficiary=0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, amount=500000)",
+        "Allocated(schemeId=1, beneficiary=0x976EA74026E726554dB657fA54763abd0C3a0aa9, amount=300000)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 12,
+      "step": "Allocate to an unregistered wallet",
+      "actor": "Department",
+      "function": "allocate",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: BeneficiaryNotActive(0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f)"
+    },
+    {
+      "n": 13,
+      "step": "Ravi buys rice and dal at the ration store: Rs 1,800",
+      "actor": "Beneficiary Ravi",
+      "function": "spend",
+      "txHash": "0x76d92c3c903367444ae0db848b943754ab154ea0634d8dd9556f9f8ef20b8fd6",
+      "block": 16,
+      "gasUsed": 117010,
+      "events": [
+        "Transfer(from=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, to=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value=180000)",
+        "Spent(schemeId=1, beneficiary=0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, merchant=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, amount=180000, category=0, invoiceRef=0x92cfb0632a76449798532cc81a5fa79317b86d35c608ccf70f27d5a7b1910638)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 14,
+      "step": "Purpose lock: Ravi tries to pay the pharmacy from the FOOD scheme",
+      "actor": "Beneficiary Ravi",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: MerchantNotEligible(0xBcd4042DE499D14e55001CcbB24a551F3b954096, 0)"
+    },
+    {
+      "n": 15,
+      "step": "Per-transaction cap: Ravi tries Rs 2,500",
+      "actor": "Beneficiary Ravi",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: ExceedsPerTxnCap(200000, 250000)"
+    },
+    {
+      "n": 16,
+      "step": "Unregistered merchant",
+      "actor": "Beneficiary Ravi",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: MerchantNotEligible(0x71bE63f3384f5fb98995898A86B02Fb2426c5788, 0)"
+    },
+    {
+      "n": 17,
+      "step": "Meena buys grain at the ration store: Rs 2,000 (exactly the cap)",
+      "actor": "Beneficiary Meena",
+      "function": "spend",
+      "txHash": "0xc540c1e0b4814e8d45d3b159e33a90e4d04c681cc28104e14faa674ec4ef6dd5",
+      "block": 20,
+      "gasUsed": 82810,
+      "events": [
+        "Transfer(from=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, to=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value=200000)",
+        "Spent(schemeId=1, beneficiary=0x976EA74026E726554dB657fA54763abd0C3a0aa9, merchant=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, amount=200000, category=0, invoiceRef=0xc744566f555fdbc3c7e912f236198eb6fe8e5c53b7f4181c4ee9ad7619ab8607)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 18,
+      "step": "Over-entitlement: Meena has Rs 1,000 left and tries Rs 2,000",
+      "actor": "Beneficiary Meena",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: InsufficientEntitlement(100000, 200000)"
+    },
+    {
+      "n": 19,
+      "step": "Compliance freezes Meena's wallet (suspected diversion)",
+      "actor": "Compliance",
+      "function": "setBeneficiaryFrozen",
+      "txHash": "0xdd9e647b086711999db8e06eb3a46bacc4d2e0dab03a8199c3da655ede3bf870",
+      "block": 22,
+      "gasUsed": 31137,
+      "events": [
+        "BeneficiaryFreezeChanged(wallet=0x976EA74026E726554dB657fA54763abd0C3a0aa9, frozen=true)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 20,
+      "step": "Frozen beneficiary cannot spend",
+      "actor": "Beneficiary Meena",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: BeneficiaryNotActive(0x976EA74026E726554dB657fA54763abd0C3a0aa9)"
+    },
+    {
+      "n": 21,
+      "step": "Compliance unfreezes Meena after review",
+      "actor": "Compliance",
+      "function": "setBeneficiaryFrozen",
+      "txHash": "0x4e7a22a1816abe3b413ea8da54960c979fc454ba03250801b7149713a6dd5811",
+      "block": 24,
+      "gasUsed": 31125,
+      "events": [
+        "BeneficiaryFreezeChanged(wallet=0x976EA74026E726554dB657fA54763abd0C3a0aa9, frozen=false)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 22,
+      "step": "Merchant redeems Rs 3,800.00 to the bank (token burned, event for bank adapter)",
+      "actor": "Merchant",
+      "function": "redeem",
+      "txHash": "0x1b652bb306f9784d8f9a926a914b0fb67f4c8c885bd8c30673d615a32b9d4b2b",
+      "block": 25,
+      "gasUsed": 31233,
+      "events": [
+        "Transfer(from=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, to=0x0000000000000000000000000000000000000000, value=380000)",
+        "Redeemed(from=0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, amount=380000, bankReference=0x1b36bb1492a824370ca08a8519946ec30fe525b6e3921d638944fe9795906055)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 23,
+      "step": "Ravi tries to spend after the scheme expired",
+      "actor": "Beneficiary Ravi",
+      "function": "spend",
+      "txHash": null,
+      "block": null,
+      "gasUsed": null,
+      "events": [],
+      "result": "REJECTED: SchemeExpired()"
+    },
+    {
+      "n": 24,
+      "step": "ANYONE (here: the registrar) returns Ravi's unspent balance to the treasury",
+      "actor": "Registrar (any caller)",
+      "function": "reclaimExpired",
+      "txHash": "0xfc81e010542fbfacdab900bf1b542d5c00d4ef168cddb1e0bd0dede2dad010d6",
+      "block": 28,
+      "gasUsed": 79920,
+      "events": [
+        "Transfer(from=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, to=0x90F79bf6EB2c4f870365E785982E1f101E93b906, value=320000)",
+        "Reclaimed(schemeId=1, beneficiary=0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, caller=0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, amount=320000)"
+      ],
+      "result": "SUCCESS"
+    },
+    {
+      "n": 25,
+      "step": "Return Meena's unspent balance to the treasury",
+      "actor": "Registrar (any caller)",
+      "function": "reclaimExpired",
+      "txHash": "0xed5367c93a737080fe116fedc3781a25cffec88065cc78c83357b47451c6d24b",
+      "block": 29,
+      "gasUsed": 58020,
+      "events": [
+        "Transfer(from=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, to=0x90F79bf6EB2c4f870365E785982E1f101E93b906, value=100000)",
+        "Reclaimed(schemeId=1, beneficiary=0x976EA74026E726554dB657fA54763abd0C3a0aa9, caller=0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, amount=100000)"
+      ],
+      "result": "SUCCESS"
+    }
+  ]
+}
